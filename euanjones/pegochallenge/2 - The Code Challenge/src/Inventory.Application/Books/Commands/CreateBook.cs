@@ -6,7 +6,7 @@ namespace Inventory.Application.Books.Commands;
 
 public static class CreateBook
 {
-    public record CreateBookRequest(string Title, string Author, DateOnly Published) : IRequest<CreateBookResponse>;
+    public record CreateBookRequest(string Title, string Author, DateOnly Published, int Quantity) : IRequest<CreateBookResponse>;
     public record CreateBookResponse(long Id);
 
     internal sealed class CreateBookHandler : IRequestHandler<CreateBookRequest, CreateBookResponse>
@@ -25,6 +25,7 @@ public static class CreateBook
                 Author = request.Author,
                 Title = request.Title,
                 PublishDate = request.Published,
+                Quantity = request.Quantity
             };
 
             _context.Add(book);

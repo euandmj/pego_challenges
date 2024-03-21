@@ -14,7 +14,7 @@ public static partial class AddBookEndpoints
 		{
 			var book = await mediator.Send(new GetBook.GetBookRequest(id), cancellationToken);
 			return Results.Ok(book);
-		}).WithOpenApi();
+		}).CacheOutput().WithOpenApi();
 
 		builder.MapGet("/books", async (CancellationToken cancellationToken, 
 			[FromServices] IMediator mediator,
@@ -22,7 +22,7 @@ public static partial class AddBookEndpoints
 		{
 			var books = await mediator.Send(new GetBooks.GetBooksRequest(offset, pageSize), cancellationToken);
 			return Results.Ok(books);
-		}).WithOpenApi();
+		}).CacheOutput().WithOpenApi();
 
 		var adminGroup = builder.MapGroup("/admin/books")
 			.WithName("Books Admin")
@@ -34,7 +34,7 @@ public static partial class AddBookEndpoints
 			CancellationToken cancellationToken, [FromServices] IMediator mediator) =>
 		{
 			var response = await mediator.Send(new CreateBook.CreateBookRequest(
-				request.Title, request.Author, request.Published), cancellationToken);
+				request.Title, request.Author, request.Published, request.Quantity), cancellationToken);
 			return Results.Ok(response.Id);
 		}).WithName("Create Book");
 
@@ -42,7 +42,7 @@ public static partial class AddBookEndpoints
 			CancellationToken cancellationToken, [FromServices] IMediator mediator) =>
 		{
 			await mediator.Send(new UpdateBook.UpdateBookRequest(
-				id, request.Title, request.Author, request.Published), cancellationToken);
+				id, request.Title, request.Author, request.Published, request.Quantity), cancellationToken);
 			return Results.NoContent();
 		}).WithName("Update Book");
 

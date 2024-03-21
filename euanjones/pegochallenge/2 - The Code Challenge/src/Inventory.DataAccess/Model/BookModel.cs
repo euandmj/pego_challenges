@@ -6,4 +6,5 @@ public class BookModel
     public string Title { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
     public DateOnly PublishDate { get; set; }
+    public int Quantity { get; set; }
 }

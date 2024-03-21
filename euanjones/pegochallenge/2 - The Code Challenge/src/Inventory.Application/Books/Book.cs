@@ -6,4 +6,5 @@ public class Book
 	public string Title { get; set; } = default!;
 	public string Author { get; set; } = default!;
 	public DateOnly PublishDate { get; set; }
+	public int Quantity { get; set; }
 }

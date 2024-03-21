@@ -6,7 +6,7 @@ namespace Inventory.Application.Books.Commands;
 
 public static class UpdateBook
 {
-    public record UpdateBookRequest(long Id, string? Title, string? Author, DateOnly? Published) : IRequest;
+    public record UpdateBookRequest(long Id, string? Title, string? Author, DateOnly? Published, int? Quantity) : IRequest;
 
     internal sealed class UpdateBookHandler : IRequestHandler<UpdateBookRequest>
     {
@@ -25,8 +25,9 @@ public static class UpdateBook
             if (request.Title is not null) book.Title = request.Title;
             if (request.Author is not null) book.Author = request.Author;
             if (request.Published is not null) book.PublishDate = request.Published.Value;
+			if (request.Quantity is not null) book.Quantity = request.Quantity.Value;
 
-            await _context.SaveChangesAsync(cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

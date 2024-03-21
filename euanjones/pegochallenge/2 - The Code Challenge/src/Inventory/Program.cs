@@ -18,8 +18,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddOutputCache(options =>
 {
 	// Would use a distributed cache with horizontally scaling
-	options.SizeLimit = 2048;
-	options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(5);
+	options.SizeLimit = 512;
+	options.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(15);
 });
 builder.Services.AddMediatR(m =>
 {
@@ -52,3 +52,6 @@ app.MapGrpcService<InventoryServiceImpl>();
 app.MapGet("/", static () => $"Inventory Service version {Assembly.GetEntryAssembly()?.GetName().Version}");
 
 app.Run();
+
+// Enable integration testing
+public partial class Program;

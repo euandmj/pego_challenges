@@ -30,7 +30,8 @@ public static class GetBooks
 				Id = book.Id,
 				Author = book.Author,
 				Title = book.Title,
-				PublishDate = book.PublishDate
+				PublishDate = book.PublishDate,
+				Quantity = book.Quantity
 			});
 		}
 	}
