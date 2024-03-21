@@ -12,6 +12,6 @@ public static class Extensions
 
 		using var dbContext = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
 
-		//dbContext.Database.Migrate();
+		dbContext.Database.Migrate();
 	}
 }

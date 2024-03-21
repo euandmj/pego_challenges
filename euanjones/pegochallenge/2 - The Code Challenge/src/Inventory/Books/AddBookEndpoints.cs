@@ -7,7 +7,7 @@ namespace Inventory.Books;
 
 public static partial class AddBookEndpoints
 {
-	public static IEndpointRouteBuilder CreateBookEndpoints(this IEndpointRouteBuilder builder)
+	public static IEndpointRouteBuilder AddPublicApi(this IEndpointRouteBuilder builder)
 	{
 		builder.MapGet("/book/{id}", async (long id, CancellationToken cancellationToken, 
 			[FromServices] IMediator mediator) =>
@@ -17,13 +17,17 @@ public static partial class AddBookEndpoints
 		}).CacheOutput().WithOpenApi();
 
 		builder.MapGet("/books", async (CancellationToken cancellationToken, 
-			[FromServices] IMediator mediator,
-			 int offset = 1, int pageSize = 10) =>
+			[FromServices] IMediator mediator, int offset = 1, int pageSize = 10) =>
 		{
 			var books = await mediator.Send(new GetBooks.GetBooksRequest(offset, pageSize), cancellationToken);
 			return Results.Ok(books);
 		}).CacheOutput().WithOpenApi();
 
+		return builder;
+	}
+
+	public static IEndpointRouteBuilder AddAdminApi(this  IEndpointRouteBuilder builder)
+	{
 		var adminGroup = builder.MapGroup("/admin/books")
 			.WithName("Books Admin")
 			.CacheOutput()

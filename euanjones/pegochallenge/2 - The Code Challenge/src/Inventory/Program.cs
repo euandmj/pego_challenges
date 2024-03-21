@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
-	app.ApplyMigrations();
+	//app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();
@@ -45,7 +45,8 @@ app.UseAuthentication();
 app.UseExceptionHandler();
 app.UseOutputCache();
 
-app.CreateBookEndpoints();
+app.AddPublicApi();
+app.AddAdminApi();
 app.MapGrpcHealthChecksService();
 app.MapGrpcService<InventoryServiceImpl>();
 
