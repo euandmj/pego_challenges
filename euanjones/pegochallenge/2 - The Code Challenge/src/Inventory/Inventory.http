@@ -1,0 +1,6 @@
+@Inventory_HostAddress = http://localhost:51132
+
+GET {{Inventory_HostAddress}}/books?id=5
+Accept: application/json
+
+###

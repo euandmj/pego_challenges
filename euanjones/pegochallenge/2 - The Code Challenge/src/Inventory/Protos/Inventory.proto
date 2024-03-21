@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "inventory.proto3";
+
+package inventory;
+
+service InventoryService {
+	rpc ValidateInventory(ValidateInventoryRequest) returns (ValidateInventoryResponse);
+}
+
+message ValidateInventoryRequest {
+	repeated InventoryItem Items = 1;
+}
+
+message ValidateInventoryResponse {
+	repeated InventoryValidationMessage Results = 1;
+}
+
+message InventoryItem {
+	int64 id = 1;
+	int32 requiredQuantity = 2;
+}
+
+message InventoryValidationMessage {
+	int64 id = 1;
+	StockOption status = 2;
+}
+
+enum StockOption {
+	InStock = 0;
+	OutOfStock = 1;
+}
