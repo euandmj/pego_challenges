@@ -20,7 +20,8 @@ public class GlobalExceptionHandler : IExceptionHandler
         var details = exception switch
         {
             BookNotFoundException => BookNotFoundErrorDetails,
-            _ => ServerErrorDetails
+            BadHttpRequestException => BadRequestErrorDetails,
+			_ => ServerErrorDetails
         };
 
         httpContext.Response.StatusCode = details.Status ?? 500;
@@ -40,4 +41,11 @@ public class GlobalExceptionHandler : IExceptionHandler
         Title = "Book not found",
         Status = StatusCodes.Status404NotFound
     };
+
+    private static readonly ProblemDetails BadRequestErrorDetails = new()
+    {
+        Title = "Bad Request",
+        Status = StatusCodes.Status400BadRequest
+    };
+
 }
