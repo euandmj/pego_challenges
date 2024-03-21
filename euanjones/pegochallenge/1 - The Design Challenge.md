@@ -36,12 +36,12 @@ Would be achieved with a combination of methods within each service as well over
 
 ## Reliability
 Would be achieved with robust API design and good authentication. Whilst a simple and well designed user interface can go far with ensuring a friendly user experience. Backend techniques can also help:
-* Authentication at the service mesh level can help prevent malicious actors from causing issues to customer baskets or event book inventory.
+* Authentication at the service mesh level can help prevent malicious actors from causing issues to customer baskets or book inventory.
 * Persistence in the Shopping Cart service ensures that a customers baskets are not lost during their session even if the user's session is temporarily lost.
 * Certain relaxed design regarding state that takes into consideration the distributed nature of the application allows the user to have a less interrupted shopping experience. When checks are required, such as with the final stages of checkout, is the state asserted with the potential to block a user's action.
 
 ## Availability
-Always on would be achieved primarily through the use of Kubernetes as an orchestrator to scaling. A minimum replica set for services along with the reverse proxy ensures that traffic always makes it it's destination. In addition appropriate retry policies would be in place so that transient errors do not result in unavailability. Replicated databases provide increased availability at the data layer since workload is distributed between instances and account for downtime with individual instances.
+Always on would be achieved primarily through the use of Kubernetes as an orchestrator to enable scaling. A minimum replica set for services along with the reverse proxy ensures that traffic always makes it to it's destination. In addition appropriate retry policies would be in place so that transient errors do not result in unavailability. Replicated databases provide increased availability at the data layer since workload is distributed between instances and account for downtime with individual instances.
 
 ## Performance
 Is ensured using the following techniques:
@@ -51,7 +51,7 @@ Is ensured using the following techniques:
 ## Maintainability
 Is a big one within distributed system design and the following techniques can be used to help operate and diagnose issues:
 * Telemetry support throughout all services so that activity data can be piped to an Observability provider such as Honeycomb, where network requests can be traced and timings analysed, such as HTTP request duration, database fetches. A mature observability solution will help identify hot paths and provide an avenue for targeted optimisations.
-* A bespoke logging solution and appropriate logging at the Service Mesh and Service layers, as well as specific domain specific logging will help explain the behaviour of the system at a give point. In addition the propagation of correlation IDs allows traffic to be isolated per context.
+* A bespoke logging solution and appropriate logging at the Service Mesh and Service layers, as well as specific domain event logging will help explain the behaviour of the system at a given point. In addition the propagation of correlation IDs allows traffic to be isolated per context.
 
 
 
